@@ -39,7 +39,7 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
         milliseconds: 800,
       ),
       child: BottomAppBar(
-        color: MyColors.primaryColor,
+        color: colorPrimary,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

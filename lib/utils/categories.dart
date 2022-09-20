@@ -31,9 +31,9 @@ class _MyCatagoriesState extends State<MyCatagories> {
                     child: Container(
                       width: 75,
                       decoration: BoxDecoration(
-                        color: MyColors.primaryColor,
+                        color: colorPrimary,
                         border: Border.all(
-                          color: MyColors.secondaryColor,
+                          color: colorPrimary,
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),

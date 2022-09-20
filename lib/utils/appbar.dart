@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../theme/theme.dart';
+
 // ignore: must_be_immutable
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   String? title;
@@ -20,8 +22,8 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             icon: const Icon(Icons.brightness_4),
             onPressed: () {
               Get.isDarkMode
-                  ? Get.changeTheme(ThemeData.light())
-                  : Get.changeTheme(ThemeData.dark());
+                  ? Get.changeTheme(lightTheme)
+                  : Get.changeTheme(darkTheme);
             })
       ],
     );

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:user_app/services/auth_controller.dart';
 import 'package:user_app/utils/bottom_appbar.dart';
 
 import '../utils/appbar.dart';
@@ -50,7 +51,7 @@ class ProfileScreen extends StatelessWidget {
               leading: Icons.logout_rounded,
               title: "Logout",
               press: () => {
-                // authService.signOut(),
+                AuthController.instance.logOut(),
               },
             ),
           ],

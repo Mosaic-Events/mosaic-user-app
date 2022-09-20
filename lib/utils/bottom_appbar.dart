@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:user_app/screens/home_screen.dart';
+import 'package:user_app/screens/promotion_screen.dart';
 
+import '../screens/profile_screen.dart';
 import '../theme/theme.dart';
 
 class MyBottomAppBar extends StatefulWidget {
@@ -47,8 +50,8 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
               padding: const EdgeInsets.only(left: 10),
               child: IconButton(
                 onPressed: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => HomePage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
                 },
                 icon: const Icon(Icons.home),
               ),
@@ -62,8 +65,10 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
             ),
             IconButton(
               onPressed: () {
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => DiscountsPage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PromotionScreen()));
               },
               icon: const Icon(Icons.discount),
             ),
@@ -81,8 +86,10 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
               padding: const EdgeInsets.only(right: 10),
               child: IconButton(
                 onPressed: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => ProfileScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfileScreen()));
                 },
                 icon: const Icon(Icons.account_circle),
               ),

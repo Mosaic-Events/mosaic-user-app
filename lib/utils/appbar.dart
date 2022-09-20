@@ -9,12 +9,12 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   MyAppBar({Key? key, required this.title}) : super(key: key);
 
   @override
-  Size get preferredSize => const Size.fromHeight(60);
+  Size get preferredSize => const Size.fromHeight(40);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('User App'),
+      title: Text('$title'),
       centerTitle: true,
       elevation: 0,
       actions: [

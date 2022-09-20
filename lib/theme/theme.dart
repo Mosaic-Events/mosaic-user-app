@@ -10,8 +10,9 @@ const darkbluishColor = Color(0xff403b58);
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: colorPrimary,
-  floatingActionButtonTheme:
-      FloatingActionButtonThemeData(backgroundColor: colorAccent),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: colorAccent,
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
@@ -25,6 +26,9 @@ ThemeData lightTheme = ThemeData(
         borderRadius: BorderRadius.circular(20.0), borderSide: BorderSide.none),
     filled: true,
     fillColor: Colors.grey.withOpacity(0.1),
+  ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: colorPrimary,
   ),
 );
 

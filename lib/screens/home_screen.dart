@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
+import '../utils/appbar.dart';
 import 'other_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,19 +9,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('User App'),
-        centerTitle: true,
-        elevation: 0,
-        actions: [
-          IconButton(
-              icon: const Icon(Icons.brightness_4),
-              onPressed: () {
-                Get.isDarkMode
-                    ? Get.changeTheme(ThemeData.light())
-                    : Get.changeTheme(ThemeData.dark());
-              })
-        ],
+      appBar: MyAppBar(
+        title: 'Home Screen',
       ),
       body: Center(
         child: ElevatedButton(

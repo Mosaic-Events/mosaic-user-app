@@ -1,16 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
-class MyHeading extends StatefulWidget {
+class MyHeading extends StatelessWidget {
   final String title;
-  const MyHeading({Key? key, required this.title}) : super(key: key);
+  final VoidCallback? onPress;
+  const MyHeading({Key? key, required this.title, this.onPress})
+      : super(key: key);
 
-  @override
-  State<MyHeading> createState() => _MyHeadingState();
-}
-
-class _MyHeadingState extends State<MyHeading> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,16 +14,14 @@ class _MyHeadingState extends State<MyHeading> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            widget.title,
+            title,
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          InkWell(
-            onTap: () {
-              log("Tapped on Trending Products view all");
-            },
+          TextButton(
+            onPressed: onPress,
             child: const Text(
               "View all",
               style: TextStyle(

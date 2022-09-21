@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:user_app/screens/promotion_screen.dart';
 
 import '../utils/appbar.dart';
 import '../utils/bottom_appbar.dart';
+import '../utils/carousel.dart';
 import '../utils/categories.dart';
 import '../utils/heading.dart';
 
@@ -24,7 +27,12 @@ class HomeScreen extends StatelessWidget {
             // Account Info
 
             // Top row
-            const MyHeading(title: "Promotions"),
+            MyHeading(
+              title: "Promotions",
+              onPress: () {
+                Get.to(() => const PromotionScreen());
+              },
+            ),
 
             // Top Banner
             Container(
@@ -49,7 +57,7 @@ class HomeScreen extends StatelessWidget {
             const MyHeading(title: "Trending"),
 
             // Carousel
-            // MyCarousel(),
+            const MyCarousel(),
           ],
         ),
       ),

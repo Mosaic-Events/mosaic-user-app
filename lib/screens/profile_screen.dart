@@ -29,15 +29,15 @@ class ProfileScreen extends StatelessWidget {
               leading: Icons.account_circle_rounded,
               title: "My Account",
               trailing: Icons.arrow_forward,
-              press: () => {
-                Get.to(() => MyAccountScreen()),
+              press: () {
+                Get.to(() => MyAccountScreen());
               },
             ),
             ProfileMenu(
               leading: Icons.settings_rounded,
               title: "Setting",
               trailing: Icons.arrow_forward,
-              press: () => {
+              press: () {
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: (context) => SettingScreen()))
               },
@@ -46,13 +46,13 @@ class ProfileScreen extends StatelessWidget {
               leading: Icons.help_center_rounded,
               title: "Help Center",
               trailing: Icons.arrow_forward,
-              press: () => {},
+              press: () {},
             ),
             ProfileMenu(
               leading: Icons.logout_rounded,
               title: "Logout",
-              press: () => {
-                AuthController.instance.logOut(),
+              press: () {
+                AuthController.instance.logOut();
               },
             ),
           ],

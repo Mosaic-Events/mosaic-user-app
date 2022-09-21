@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class MyCarousel extends StatefulWidget {
   const MyCarousel({Key? key}) : super(key: key);
@@ -31,34 +31,37 @@ class _MyCarouselState extends State<MyCarousel> {
           Map bannerUrl = document.data() as Map;
           carouselUrl.add(bannerUrl);
         }).toList();
-        return CarouselSlider(
-          options: CarouselOptions(
-            height: 150.0,
-            enlargeCenterPage: true,
-            viewportFraction: 1,
-            autoPlay: true,
-            aspectRatio: 16 / 9,
-          ),
-          items: carouselUrl.map((imagePath) {
-            return Builder(
-              builder: (BuildContext context) {
-                return SizedBox(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(imagePath['carousel_banners_url']),
-                        fit: BoxFit.fill,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                      color: Colors.red,
-                    ),
-                  ),
-                );
-              },
-            );
-          }).toList(),
-        );
+        return carouselUrl.isNotEmpty
+            ? CarouselSlider(
+                options: CarouselOptions(
+                  height: 150.0,
+                  enlargeCenterPage: true,
+                  viewportFraction: 1,
+                  autoPlay: true,
+                  aspectRatio: 16 / 9,
+                ),
+                items: carouselUrl.map((imagePath) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return SizedBox(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  imagePath['carousel_banners_url']),
+                              fit: BoxFit.fill,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                            color: Colors.red,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }).toList(),
+              )
+            : Text('Carousel Data is empty, check it');
       },
     );
   }

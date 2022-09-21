@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ProfileMenu extends StatelessWidget {
-  const ProfileMenu(
-      {Key? key,
-      required this.leading,
-      required this.title,
-      this.trailing,
-      this.press})
-      : super(key: key);
+  const ProfileMenu({
+    Key? key,
+    required this.leading,
+    required this.title,
+    this.trailing,
+    this.press,
+  }) : super(key: key);
 
   final IconData leading;
   final String title;

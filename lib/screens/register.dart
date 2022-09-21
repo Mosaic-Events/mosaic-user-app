@@ -1,10 +1,13 @@
-// ignore_for_file: prefer_const_constructors
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:user_app/screens/login.dart';
 import 'package:user_app/services/auth_controller.dart';
+
+import '../models/user_model.dart';
 
 enum Gender { male, female, other }
 
@@ -32,9 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
   String? _gender;
-  String? _role;
   final _genderList = ['Male', 'Female', 'Other'];
-  final _roleList = ['Personal', 'Business'];
 
   String? _phoneNumber;
 
@@ -96,7 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     // gender field
     final genderField = DropdownButtonHideUnderline(
         child: DropdownButtonFormField(
-      hint: Text("Select Gender"),
+      hint: const Text("Select Gender"),
       value: _gender,
       items: _genderList
           .map(
@@ -118,51 +119,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     ));
 
-    // role field
-    final roleField = DropdownButtonHideUnderline(
-        child: DropdownButtonFormField(
-      hint: Text("Select Role"),
-      value: _role,
-      items: _roleList
-          .map(
-            (e) => DropdownMenuItem(value: e, child: Text(e)),
-          )
-          .toList(),
-      onChanged: (value) {
-        setState(() {
-          _role = value.toString();
-        });
-      },
+    // phone no field
+    final phoneNoField = IntlPhoneField(
       decoration: InputDecoration(
-        // contentPadding: const EdgeInsets.all(0),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        labelText: "Role",
+        counter: const Offstage(),
+        labelText: 'Mobile Number',
         border: OutlineInputBorder(
+          borderSide: const BorderSide(),
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-    ));
-
-    // phone no field
-    // final phoneNoField = IntlPhoneField(
-    //   decoration: InputDecoration(
-    //     contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-    //     counter: Offstage(),
-    //     labelText: 'Mobile Number',
-    //     border: OutlineInputBorder(
-    //       borderSide: BorderSide(),
-    //       borderRadius: BorderRadius.circular(10),
-    //     ),
-    //   ),
-    //   showDropdownIcon: false,
-    //   flagsButtonPadding: EdgeInsets.only(left: 12),
-    //   initialCountryCode: 'PK',
-    //   onChanged: ((phone) {
-    //     setState(() {
-    //       _phoneNumber = phone.completeNumber;
-    //     });
-    //   }),
-    // );
+      showDropdownIcon: false,
+      flagsButtonPadding: const EdgeInsets.only(left: 12),
+      initialCountryCode: 'PK',
+      onChanged: ((phone) {
+        setState(() {
+          _phoneNumber = phone.completeNumber;
+        });
+      }),
+    );
 
     // password field
     final passwordField = TextFormField(
@@ -222,8 +198,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: MaterialButton(
         onPressed: () {
           if (_formKey.currentState!.validate()) {
-            AuthController.instance.createUserWithEmailAndPassword(
-                emailController.text.trim(), passwordController.text.trim());
+            AuthController.instance
+                .createUserWithEmailAndPassword(
+                  emailController.text.trim(),
+                  passwordController.text.trim(),
+                )
+                .then(
+                  (value) => postUserDetailsToFirestore(),
+                )
+                .catchError((error) {
+              Fluttertoast.showToast(msg: error!.message);
+            });
           }
         },
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -252,7 +237,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Icons.arrow_back,
           ),
         ),
-        title: Text("Create an account"),
+        title: const Text("Create an account"),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -266,18 +251,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    // fullnameField,
+                    fullnameField,
                     const SizedBox(height: 10),
                     emailField,
                     const SizedBox(height: 10),
-                    // phoneNoField,
+                    phoneNoField,
                     passwordField,
                     const SizedBox(height: 10),
                     confirmPasswordField,
                     const SizedBox(height: 10),
-                    // genderField,
-                    const SizedBox(height: 10),
-                    // roleField,
+                    genderField,
                     const SizedBox(height: 10),
                     signupButton,
                     const SizedBox(height: 10),
@@ -287,7 +270,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const Text("Already have an account? "),
                         GestureDetector(
                           onTap: () {
-                            Get.to(() => LoginScreen());
+                            Get.to(() => const LoginScreen());
                           },
                           child: const Text(
                             "Login",
@@ -309,39 +292,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  // postUserDetailsToFirestore() async {
-  //   // 1. calling our firestore
-  //   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  //   User? user = _auth.currentUser;
-  //   // 2. calling our user_model
-  //   UserModel userModel = UserModel();
-  //   // 3. writing values
-  //   if (user != null) {
-  //     userModel.uid = user.uid;
-  //     userModel.fullname = fullnameController.text;
-  //     userModel.email = user.email;
-  //     userModel.role = _role;
-  //     userModel.phoneNo = _phoneNumber;
-  //     userModel.gender = _gender;
-  //     userModel.joiningDate = DateTime.now();
-  //     // userModel.profileUrl = user.email;
-  //     userModel.isActive = true;
-  //     // 4. sending values to DB
-  //     await firebaseFirestore
-  //         .collection("users")
-  //         .doc(user.uid)
-  //         .set(userModel.toMap())
-  //         .whenComplete(() {
-  //       var currentUserr = FirebaseAuth.instance.currentUser!;
-  //       currentUserr.updateDisplayName(fullnameController.text);
-  //       currentUserr.updateEmail(emailController.text);
-  //     }).whenComplete(() =>
-  //             Fluttertoast.showToast(msg: "Account created successfully :)"));
-
-  //     Navigator.push(
-  //       (context),
-  //       MaterialPageRoute(builder: (context) => HomeScreen()),
-  //     );
-  //   }
-  // }
+  postUserDetailsToFirestore() async {
+    // 1. calling our firestore
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+    // 2. calling our user_model
+    UserModel userModel = UserModel();
+    // 3. writing values
+    if (user != null) {
+      userModel.uid = user.uid;
+      userModel.fullname = fullnameController.text;
+      userModel.email = user.email;
+      userModel.phoneNo = _phoneNumber;
+      userModel.gender = _gender;
+      userModel.joiningDate = DateTime.now();
+      // userModel.profileUrl = user.email;
+      userModel.isActive = true;
+      // 4. sending values to DB
+      await firebaseFirestore
+          .collection("users")
+          .doc(user.uid)
+          .set(userModel.toMap())
+          .whenComplete(
+        () {
+          var currentUserr = FirebaseAuth.instance.currentUser!;
+          currentUserr.updateDisplayName(fullnameController.text);
+          currentUserr.updateEmail(emailController.text);
+        },
+      ).whenComplete(() =>
+              Fluttertoast.showToast(msg: "Account created successfully :)"));
+    }
+  }
 }

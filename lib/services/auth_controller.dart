@@ -31,7 +31,7 @@ class AuthController extends GetxController {
     }
   }
 
-  void createUserWithEmailAndPassword(String email, password) async {
+  Future createUserWithEmailAndPassword(String email, password) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);

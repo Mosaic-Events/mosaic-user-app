@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:user_app/screens/my_account_screen.dart';
 import 'package:user_app/services/auth_controller.dart';
 import 'package:user_app/utils/bottom_appbar.dart';
 
@@ -28,8 +30,7 @@ class ProfileScreen extends StatelessWidget {
               title: "My Account",
               trailing: Icons.arrow_forward,
               press: () => {
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => MyAccountScreen()))
+                Get.to(() => MyAccountScreen()),
               },
             ),
             ProfileMenu(

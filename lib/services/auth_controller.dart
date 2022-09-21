@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,12 @@ class AuthController extends GetxController {
   late Rx<User?> _user;
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  // GET CurrentUser
+  User? currentUser = FirebaseAuth.instance.currentUser;
+
+  // GET UID
+  String? userId = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   void onReady() {
@@ -86,4 +93,9 @@ class AuthController extends GetxController {
   void logOut() async {
     await _firebaseAuth.signOut();
   }
+
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+
+  CollectionReference get usersCollection =>
+      _firebaseFirestore.collection('users');
 }

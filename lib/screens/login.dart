@@ -149,6 +149,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 10),
                     loginButton,
                     const SizedBox(height: 15),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('Forgot Password'),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[

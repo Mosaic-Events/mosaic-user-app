@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user_app/screens/promotion_screen.dart';
+import 'package:user_app/screens/vendor_services_screen.dart';
 
 import '../utils/appbar.dart';
 import '../utils/bottom_appbar.dart';
@@ -54,7 +55,12 @@ class HomeScreen extends StatelessWidget {
             const MyCatagories(),
 
             // Trending Heading
-            const MyHeading(title: "Trending"),
+            MyHeading(
+              title: "Trending",
+              onPress: () {
+                Get.to(() => const VendorServiceScreen());
+              },
+            ),
 
             // Carousel
             const MyCarousel(),

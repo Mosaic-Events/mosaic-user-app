@@ -23,14 +23,17 @@ class MyAccountScreen extends StatelessWidget {
             children: [
               const ProfilePic(),
               const SizedBox(height: 20),
+              Text(
+                authController!.emailVerified.toString(),
+              ),
               ViewTextField(
                 leading: Icons.account_circle,
-                title: authController!.displayName!,
+                title: authController.displayName!,
               ),
               ViewTextField(
                 leading: Icons.email_outlined,
                 title: authController.email!,
-              )
+              ),
             ],
           )),
     );

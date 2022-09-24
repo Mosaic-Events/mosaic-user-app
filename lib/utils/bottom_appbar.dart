@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:user_app/screens/home_screen.dart';
 import 'package:user_app/screens/promotion_screen.dart';
+import 'package:user_app/widgets/show_dailog_box.dart';
 
 import '../screens/profile_screen.dart';
 import '../theme/theme.dart';
@@ -75,10 +77,7 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
             IconButton(
               tooltip: "Notification",
               onPressed: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => NotificationsPage()));
+                Get.to(() => const ShowForm());
               },
               icon: const Icon(Icons.notifications_active),
             ),

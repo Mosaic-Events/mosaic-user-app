@@ -64,6 +64,7 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
               icon: const Icon(Icons.chat),
             ),
             IconButton(
+              tooltip: 'Discounts',
               onPressed: () {
                 Navigator.push(
                     context,

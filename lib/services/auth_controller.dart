@@ -18,9 +18,6 @@ class AuthController extends GetxController {
   // GET CurrentUser
   User? currentUser = FirebaseAuth.instance.currentUser;
 
-  // GET UID
-  String? userId = FirebaseAuth.instance.currentUser!.uid;
-
   @override
   void onReady() {
     super.onReady();

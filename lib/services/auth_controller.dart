@@ -15,9 +15,6 @@ class AuthController extends GetxController {
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  // GET CurrentUser
-  User? currentUser = FirebaseAuth.instance.currentUser;
-
   @override
   void onReady() {
     super.onReady();

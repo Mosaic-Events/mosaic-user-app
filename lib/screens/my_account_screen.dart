@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:user_app/services/auth_controller.dart';
 
 import '../utils/view_text_field.dart';
 import '../widgets/profile_pic.dart';
@@ -9,7 +9,7 @@ class MyAccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var authController = AuthController.instance.currentUser;
+    var user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
       appBar: AppBar(
@@ -24,15 +24,15 @@ class MyAccountScreen extends StatelessWidget {
               const ProfilePic(),
               const SizedBox(height: 20),
               Text(
-                authController!.emailVerified.toString(),
+                user!.emailVerified.toString(),
               ),
               ViewTextField(
                 leading: Icons.account_circle,
-                title: authController.displayName!,
+                title: user.displayName.toString(),
               ),
               ViewTextField(
                 leading: Icons.email_outlined,
-                title: authController.email!,
+                title: user.email.toString(),
               ),
             ],
           )),

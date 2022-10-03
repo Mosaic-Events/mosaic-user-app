@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:user_app/models/booking_model.dart';
+import 'package:user_app/models/user_model.dart';
 import 'package:user_app/screens/date_picker_screen.dart';
 import '../utils/appbar.dart';
 import '../widgets/my_loading_widget.dart';
@@ -182,22 +183,30 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
     Navigator.of(context).pop();
   }
 
-  Future postBookingDetailsToFirestore(
-      {required String serviceId, required List<DateTime> bookingDates}) async {
+  Future postBookingDetailsToFirestore({
+    required String serviceId,
+    required List<DateTime> bookingDates,
+  }) async {
     // 1. calling our firestore
     final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     // 2. Get Current User
-    User? user = FirebaseAuth.instance.currentUser;
-    // 3. calling our model
-    BookedServiceModel bookedServiceModel = BookedServiceModel();
-    // 4. Writing Values
-    if (user != null) {
-      // For unique name
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      UserModel? user = UserModel(
+        uid: currentUser.uid,
+        fullname: currentUser.displayName,
+        email: currentUser.email,
+      );
+      // 3. calling our model
+      BookedServiceModel bookedServiceModel = BookedServiceModel();
+      // 4. Writing Values
       final bookingId = 'booking_${DateTime.now().millisecondsSinceEpoch}';
+
       bookedServiceModel.id = bookingId;
       bookedServiceModel.bookedBy = user.uid;
       bookedServiceModel.bookedService = serviceId;
       bookedServiceModel.bookedDates = bookingDates;
+      bookedServiceModel.user = user;
       // 5. sending values to DB
       await firebaseFirestore
           .collection("booking_details")

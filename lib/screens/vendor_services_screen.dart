@@ -23,11 +23,14 @@ class VendorServiceScreen extends StatelessWidget {
                 itemBuilder: (BuildContext context, index) {
                   final businessName =
                       snapshot.data!.docs[index]['businessName'];
+                  final businessId =
+                      snapshot.data!.docs[index]['businessId'];
                   final owner = snapshot.data!.docs[index]['owner'];
                   final initialPrice =
                       snapshot.data!.docs[index]['initialPrice'];
                   final imageUrl = snapshot.data!.docs[index]['images'];
                   return MyCard(
+                    id: businessId,
                     title: businessName,
                     price: initialPrice,
                     description: owner,

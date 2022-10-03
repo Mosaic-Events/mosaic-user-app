@@ -88,8 +88,13 @@ class AuthController extends GetxController {
     await _firebaseAuth.signOut();
   }
 
+  // FirebaseFirestore
+
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
   CollectionReference get usersCollection =>
       _firebaseFirestore.collection('users');
+
+  CollectionReference get businessCollection =>
+      _firebaseFirestore.collection('businesses');
 }

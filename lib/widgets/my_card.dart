@@ -1,22 +1,26 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable, unnecessary_string_interpolations
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../screens/service_detail_screen.dart';
+
+// ignore: must_be_immutable
 class MyCard extends StatefulWidget {
+  String id;
   String title;
   String description;
   String price;
   List imageUrl;
   final VoidCallback? onPress;
 
-  MyCard(
-      {Key? key,
-      required this.title,
-      required this.description,
-      required this.price,
-      required this.imageUrl,
-      this.onPress})
-      : super(key: key);
+  MyCard({
+    Key? key,
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.price,
+    required this.imageUrl,
+    this.onPress,
+  }) : super(key: key);
 
   @override
   State<MyCard> createState() => _MyCardState();
@@ -49,7 +53,7 @@ class _MyCardState extends State<MyCard> {
                 padding: EdgeInsets.all(8),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Expanded(
@@ -62,10 +66,10 @@ class _MyCardState extends State<MyCard> {
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(right: 16.0),
+                    padding: const EdgeInsets.only(right: 16.0),
                     child: Text(
                       widget.description,
-                      style: TextStyle(),
+                      style: const TextStyle(),
                       textScaleFactor: 0.9,
                     ),
                   ),
@@ -77,11 +81,19 @@ class _MyCardState extends State<MyCard> {
                       children: [
                         Text(
                           "Rs. ${widget.price}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                           textScaleFactor: 1.25,
                         ),
+                        TextButton(
+                          child: const Text('Details'),
+                          onPressed: () {
+                            Get.to(() => ServiceDetailScreen(
+                                  serviceId: widget.id,
+                                ));
+                          },
+                        )
                       ],
                     ),
                   )

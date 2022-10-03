@@ -1,11 +1,11 @@
 class BookedServiceModel {
-  String? uid;
+  String? id;
   String? bookedBy;
-  List? bookedDates;
   String? bookedService;
+  List<DateTime>? bookedDates;
 
   BookedServiceModel({
-    this.uid,
+    this.id,
     this.bookedBy,
     this.bookedDates,
     this.bookedService,
@@ -13,7 +13,7 @@ class BookedServiceModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'uid': uid,
+      'id': id,
       'bookedBy': bookedBy,
       'bookedDates': bookedDates,
       'bookedService': bookedService,
@@ -22,7 +22,7 @@ class BookedServiceModel {
 
   factory BookedServiceModel.fromMap(map) {
     return BookedServiceModel(
-      uid: map['uid'],
+      id: map['id'],
       bookedDates: map['bookedDates'],
       bookedBy: map['bookedBy'],
       bookedService: map['bookedService'],

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:user_app/utils/appbar.dart';
 
+import '../models/user_model.dart';
 import '../widgets/my_card.dart';
 
 class VendorServiceScreen extends StatelessWidget {
@@ -23,9 +24,9 @@ class VendorServiceScreen extends StatelessWidget {
                 itemBuilder: (BuildContext context, index) {
                   final businessName =
                       snapshot.data!.docs[index]['businessName'];
-                  final businessId =
-                      snapshot.data!.docs[index]['businessId'];
+                  final businessId = snapshot.data!.docs[index]['businessId'];
                   final owner = snapshot.data!.docs[index]['owner'];
+                  var user = UserModel.fromMap(owner);
                   final initialPrice =
                       snapshot.data!.docs[index]['initialPrice'];
                   final imageUrl = snapshot.data!.docs[index]['images'];
@@ -33,7 +34,7 @@ class VendorServiceScreen extends StatelessWidget {
                     id: businessId,
                     title: businessName,
                     price: initialPrice,
-                    description: owner,
+                    description: user.fullname!,
                     imageUrl: imageUrl,
                     onPress: () {},
                   );

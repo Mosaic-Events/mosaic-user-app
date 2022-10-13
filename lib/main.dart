@@ -5,9 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user_app/services/auth_controller.dart';
 
+import 'services/cloud_controller.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) => Get.put(AuthController()));
+  await Firebase.initializeApp().then((value) {
+    Get.put(AuthController());
+    Get.put(CloudController());
+  });
   runApp(const MyApp());
 }
 

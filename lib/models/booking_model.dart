@@ -2,35 +2,32 @@ import 'package:user_app/models/user_model.dart';
 
 class BookedServiceModel {
   String? id;
-  String? bookedBy;
-  String? bookedService;
+  String? bookedService; //FIXME: type of BusinessModel
   List<DateTime>? bookedDates;
-  UserModel? user;
+  UserModel? bookedBy;
 
   BookedServiceModel({
     this.id,
-    this.bookedBy,
     this.bookedDates,
     this.bookedService,
-    this.user,
+    this.bookedBy,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'bookedBy': bookedBy,
       'bookedDates': bookedDates,
       'bookedService': bookedService,
-      'user': user?.toMap(),
+      'bookedBy': bookedBy?.toMap(),
     };
   }
 
-  // factory BookedServiceModel.fromMap(map) {
-  //   return BookedServiceModel(
-  //     id: map['id'],
-  //     bookedDates: map['bookedDates'],
-  //     bookedBy: map['bookedBy'],
-  //     bookedService: map['bookedService'],
-  //   );
-  // }
+  factory BookedServiceModel.fromMap(map) {
+    return BookedServiceModel(
+      id: map['id'],
+      bookedDates: map['bookedDates'],
+      bookedService: map['bookedService'],
+      bookedBy: map['bookedBy'],
+    );
+  }
 }

@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors, avoid_print
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../theme/theme.dart';
-// import 'package:mosaic_event/screens/restaurants.dart';
 
 class MyCatagories extends StatefulWidget {
   const MyCatagories({Key? key}) : super(key: key);
@@ -15,52 +14,71 @@ class MyCatagories extends StatefulWidget {
 class _MyCatagoriesState extends State<MyCatagories> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            height: 75,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(right: 10),
-                  child: InkWell(
-                    onTap: () {},
-                    child: Container(
-                      width: 75,
-                      decoration: BoxDecoration(
-                        color: colorPrimary,
-                        border: Border.all(
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance.collection('categories').snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text("Something went wrong! ${snapshot.error}");
+        } else if (snapshot.hasData) {
+          if (snapshot.data!.docs.isNotEmpty) {
+            return SizedBox(
+              height: 75,
+              child: ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  final categoryName = snapshot.data!.docs[index]['cateName'];
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                        width: 75,
+                        decoration: BoxDecoration(
                           color: colorPrimary,
+                          border: Border.all(
+                            color: colorPrimary,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(
-                              Icons.restaurant,
-                              size: 20,
-                            ),
-                            Text(
-                              "Restaurants",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500, fontSize: 12),
-                            ),
-                          ],
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // const Icon(
+                              //   Icons.restaurant,
+                              //   size: 20,
+                              // ),
+                              Text(
+                                categoryName,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w500, fontSize: 12),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+                  );
+                },
+              ),
+            );
+          } else {
+            return const Center(
+                child: Text(
+              "Sorry, Something went wrong.",
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ));
+          }
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
   }
 }

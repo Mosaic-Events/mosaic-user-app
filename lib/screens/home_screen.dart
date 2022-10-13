@@ -12,7 +12,6 @@ import '../utils/heading.dart';
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
-  final ScrollController _scrollController = ScrollController();
   bool showBottomAppBar = true;
   @override
   Widget build(BuildContext context) {
@@ -22,49 +21,52 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-        child: ListView(
-          controller: _scrollController,
-          children: [
-            // Account Info
+        child: SingleChildScrollView(
+          child: Column(
+            // controller: _scrollController,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Account Info
 
-            // Top row
-            MyHeading(
-              title: "Promotions",
-              onPress: () {
-                Get.to(() => const PromotionScreen());
-              },
-            ),
-
-            // Top Banner
-            Container(
-              height: 150,
-              decoration: BoxDecoration(
-                image: const DecorationImage(
-                  image: NetworkImage(
-                      'https://raw.githubusercontent.com/trainingtuts/mosaic_event/master/assets/images/image_1.png'),
-                  fit: BoxFit.fill,
-                ),
-                borderRadius: BorderRadius.circular(10),
+              // Top row
+              MyHeading(
+                title: "Promotions",
+                onPress: () {
+                  Get.to(() => const PromotionScreen());
+                },
               ),
-            ),
 
-            // Categories Heading
-            const MyHeading(title: "Categories"),
+              // Top Banner
+              Container(
+                height: 150,
+                decoration: BoxDecoration(
+                  image: const DecorationImage(
+                    image: NetworkImage(
+                        'https://raw.githubusercontent.com/trainingtuts/mosaic_event/master/assets/images/image_1.png'),
+                    fit: BoxFit.fill,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
 
-            // Catagories
-            const MyCatagories(),
+              // Categories Heading
+              const MyHeading(title: "Categories"),
 
-            // Trending Heading
-            MyHeading(
-              title: "Trending",
-              onPress: () {
-                Get.to(() => const VendorServiceScreen());
-              },
-            ),
+              // Catagories
+              const MyCatagories(),
 
-            // Carousel
-            const MyCarousel(),
-          ],
+              // Trending Heading
+              MyHeading(
+                title: "Trending",
+                onPress: () {
+                  Get.to(() => const VendorServiceScreen());
+                },
+              ),
+
+              // Carousel
+              const MyCarousel(),
+            ],
+          ),
         ),
       ),
       // BottomAppBar

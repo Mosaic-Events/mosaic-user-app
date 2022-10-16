@@ -51,8 +51,8 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
             } else if (snapshot.connectionState == ConnectionState.done) {
               Map<String, dynamic> data =
                   snapshot.data!.data() as Map<String, dynamic>;
-                  final owner = data['owner'];
-                  final UserModel user = UserModel.fromMap(owner);
+              final owner = data['owner'];
+              final UserModel user = UserModel.fromMap(owner);
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -64,7 +64,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
                     ),
                   ),
                   Text(
-                    user.fullname?? "null",
+                    user.fullname ?? "null",
                     style: const TextStyle(
                       fontSize: 15,
                     ),
@@ -184,42 +184,4 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
   void close() {
     Navigator.of(context).pop();
   }
-
-  // Future postBookingDetailsToFirestore({
-  //   required String serviceId,
-  //   required List<DateTime> bookingDates,
-  // }) async {
-  //   // 1. calling our firestore
-  //   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  //   // 2. Get Current User
-  //   final currentUser = FirebaseAuth.instance.currentUser;
-  //   if (currentUser != null) {
-  //     UserModel? user = UserModel(
-  //       uid: currentUser.uid,
-  //       fullname: currentUser.displayName,
-  //       email: currentUser.email,
-  //     );
-  //     // 3. calling our model
-  //     BookedServiceModel bookedServiceModel = BookedServiceModel();
-  //     // 4. Writing Values
-  //     final bookingId = 'booking_${DateTime.now().millisecondsSinceEpoch}';
-
-  //     bookedServiceModel.id = bookingId;
-  //     bookedServiceModel.bookedBy = user.uid;
-  //     bookedServiceModel.bookedService = serviceId;
-  //     bookedServiceModel.bookedDates = bookingDates;
-  //     bookedServiceModel.user = user;
-  //     // 5. sending values to DB
-  //     await firebaseFirestore
-  //         .collection("booking_details")
-  //         .doc(bookingId)
-  //         .set(bookedServiceModel.toMap())
-  //         .whenComplete(() {
-  //       log("Order successfully place wait for confirmation");
-  //       Fluttertoast.showToast(
-  //           msg: "Order successfully place wait for confirmation");
-  //       Get.back();
-  //     });
-  //   }
-  // }
 }

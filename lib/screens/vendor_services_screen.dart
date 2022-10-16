@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:user_app/utils/appbar.dart';
+import 'package:user_app/utils/bottom_appbar.dart';
 
 import '../models/user_model.dart';
 import '../widgets/my_card.dart';
@@ -57,6 +58,7 @@ class VendorServiceScreen extends StatelessWidget {
           }
         },
       ),
+      bottomNavigationBar: const MyBottomAppBar(),
     );
   }
 }

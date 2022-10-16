@@ -52,25 +52,18 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
               padding: const EdgeInsets.only(left: 10),
               child: IconButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                  Get.offAll(() => HomeScreen());
                 },
                 icon: const Icon(Icons.home),
               ),
             ),
             IconButton(
-              onPressed: () {
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => ChatPage()));
-              },
+              onPressed: () {},
               icon: const Icon(Icons.chat),
             ),
             IconButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const PromotionScreen()));
+                Get.to(() => const PromotionScreen());
               },
               icon: const Icon(Icons.discount),
             ),
@@ -85,10 +78,7 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
               padding: const EdgeInsets.only(right: 10),
               child: IconButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ProfileScreen()));
+                  Get.to(() => const ProfileScreen());
                 },
                 icon: const Icon(Icons.account_circle),
               ),

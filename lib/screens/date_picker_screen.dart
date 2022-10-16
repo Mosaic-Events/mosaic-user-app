@@ -15,9 +15,6 @@ class _DatePickerState extends State<DatePicker> {
       DateRangePickerController();
   DateTime selectedDates = DateTime.now();
 
-  final firstDate = DateTime(2021, 1);
-  final lastDate = DateTime(2021, 12);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +25,7 @@ class _DatePickerState extends State<DatePicker> {
         showTodayButton: true,
         showActionButtons: true,
         enablePastDates: false,
-        onSubmit: (dates) {
+        onSubmit: ( dates) {
           if (dates != null) {
             Get.back(result: dates);
           }

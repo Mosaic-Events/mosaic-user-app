@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:user_app/screens/home_screen.dart';
 
@@ -14,6 +15,8 @@ class AuthController extends GetxController {
   late Rx<User?> _user;
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  late UserCredential _userCredential;
 
   @override
   void onReady() {
@@ -34,7 +37,7 @@ class AuthController extends GetxController {
 
   Future createUserWithEmailAndPassword(String email, password) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      _userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
     } catch (e) {
       Get.snackbar(
@@ -60,7 +63,7 @@ class AuthController extends GetxController {
 
   void signInUserWithEmailAndPassword(String email, password) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      _userCredential = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
     } catch (e) {
       Get.snackbar(
@@ -86,6 +89,49 @@ class AuthController extends GetxController {
 
   void logOut() async {
     await _firebaseAuth.signOut();
+  }
+
+  Future deleteUser(String email, String password) async {
+    try {
+      UserCredential newCredential =
+          await _userCredential.user!.reauthenticateWithCredential(
+        EmailAuthProvider.credential(email: email, password: password),
+      );
+      newCredential.user!.delete();
+      log('User deleted');
+    } catch (e) {
+      Get.snackbar(
+        'About Delete User',
+        'delete message',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        titleText: const Text(
+          'Account deletion failed',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        messageText: Text(
+          e.toString(),
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      );
+      log("${e.toString()} reauth");
+    }
+  }
+
+  Future sendEmailVerifyLink() async {
+    try {
+      if (!_userCredential.user!.emailVerified) {
+        await _userCredential.user!
+            .sendEmailVerification()
+            .whenComplete(() => Fluttertoast.showToast(msg: 'Link successfully sent'));
+      }
+    } catch (e) {
+      log(e.toString());
+    }
   }
 
   // FirebaseFirestore

@@ -130,6 +130,13 @@ class BookingDetail extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: const Text('Cancel'),
+                    ),
+                  ),
                 ],
               ),
             );
@@ -142,7 +149,6 @@ class BookingDetail extends StatelessWidget {
   }
 
   timeToDate(List timestamps) {
-    print(timestamps);
     List<DateTime> dates = [];
     for (Timestamp timestamp in timestamps) {
       dates.add(timestamp.toDate());

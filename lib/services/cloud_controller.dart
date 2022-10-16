@@ -75,4 +75,18 @@ class CloudController {
     }
     return dates;
   }
+
+  Future resetPassword({required String email}) async {
+    try {
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: email)
+          .whenComplete(() {
+        log('Password reset link sent');
+        Fluttertoast.showToast(msg: 'Password reset link sent');
+      });
+    } on FirebaseAuthException catch (e) {
+      log(e.toString());
+      Fluttertoast.showToast(msg: e.code);
+    }
+  }
 }

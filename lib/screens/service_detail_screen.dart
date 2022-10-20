@@ -10,6 +10,7 @@ import 'package:user_app/services/cloud_controller.dart';
 
 import '../utils/appbar.dart';
 import '../widgets/my_loading_widget.dart';
+import 'image_view.dart';
 
 class ServiceDetailScreen extends StatefulWidget {
   final String serviceId;
@@ -52,6 +53,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
               Map<String, dynamic> data =
                   snapshot.data!.data() as Map<String, dynamic>;
               final owner = data['owner'];
+              final images = data['images'];
               final UserModel user = UserModel.fromMap(owner);
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,14 +110,20 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
                           crossAxisSpacing: 2.0,
                           mainAxisSpacing: 2.0,
                         ),
-                        itemCount: data['images'].length,
+                        itemCount: images.length,
                         itemBuilder: (BuildContext context, index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              // borderRadius: BorderRadius.circular(0.0),
-                              image: DecorationImage(
-                                  image: NetworkImage(data['images'][index]),
-                                  fit: BoxFit.fill),
+                          return InkWell(
+                            onTap: () => Get.to(() => GalleryWidget(
+                                  urls: images,
+                                  index: index,
+                                )),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                // borderRadius: BorderRadius.circular(0.0),
+                                image: DecorationImage(
+                                    image: NetworkImage(images[index]),
+                                    fit: BoxFit.fill),
+                              ),
                             ),
                           );
                         }),

@@ -8,7 +8,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     //form key
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
 
     return Scaffold(
       appBar: AppBar(
@@ -19,7 +19,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(36.0),
         child: Form(
-          key: _formKey,
+          key: formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -50,7 +50,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
+                  if (formKey.currentState!.validate()) {
                    CloudController.instance.resetPassword(
                         email: emailController.text.trim());
                   }

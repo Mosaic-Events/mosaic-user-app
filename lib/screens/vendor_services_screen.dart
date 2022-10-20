@@ -1,3 +1,7 @@
+// ignore_for_file: must_be_immutable
+
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:user_app/utils/appbar.dart';
@@ -7,14 +11,29 @@ import '../models/user_model.dart';
 import '../widgets/my_card.dart';
 
 class VendorServiceScreen extends StatelessWidget {
-  const VendorServiceScreen({Key? key}) : super(key: key);
+  String? category;
+  VendorServiceScreen({Key? key, this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    businessStream() {
+      var stream;
+      if (category != null) {
+        stream = FirebaseFirestore.instance
+            .collection('businesses')
+            .where('businessCategory', isEqualTo: category)
+            .snapshots();
+      } else {
+        stream =
+            FirebaseFirestore.instance.collection('businesses').snapshots();
+      }
+      return stream;
+    }
+
     return Scaffold(
       appBar: MyAppBar(title: 'Service Screen'),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('businesses').snapshots(),
+        stream: businessStream(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Text("Something went wrong! ${snapshot.error}");

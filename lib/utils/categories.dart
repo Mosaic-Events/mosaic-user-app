@@ -1,6 +1,7 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:user_app/screens/vendor_services_screen.dart';
 
 import '../theme/theme.dart';
 
@@ -31,7 +32,9 @@ class _MyCatagoriesState extends State<MyCatagories> {
                   return Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => VendorServiceScreen(category: categoryName,));
+                      },
                       child: Container(
                         width: 75,
                         decoration: BoxDecoration(

@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
               MyHeading(
                 title: "Trending",
                 onPress: () {
-                  Get.to(() => const VendorServiceScreen());
+                  Get.to(() => VendorServiceScreen());
                 },
               ),
 

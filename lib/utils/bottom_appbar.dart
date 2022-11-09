@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:user_app/screens/home_screen.dart';
 import 'package:user_app/screens/promotion_screen.dart';
+import 'package:user_app/widgets/show_dailog_box.dart';
 
 import '../screens/profile_screen.dart';
 import '../theme/theme.dart';
@@ -50,36 +52,26 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
               padding: const EdgeInsets.only(left: 10),
               child: IconButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                  Get.offAll(() => HomeScreen());
                 },
                 icon: const Icon(Icons.home),
               ),
             ),
             IconButton(
-              onPressed: () {
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => ChatPage()));
-              },
+              onPressed: () {},
               icon: const Icon(Icons.chat),
             ),
             IconButton(
               tooltip: 'Discounts',
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const PromotionScreen()));
+                Get.to(() => const PromotionScreen());
               },
               icon: const Icon(Icons.discount),
             ),
             IconButton(
               tooltip: "Notification",
               onPressed: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => NotificationsPage()));
+                Get.to(() => const ShowForm());
               },
               icon: const Icon(Icons.notifications_active),
             ),
@@ -87,10 +79,7 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
               padding: const EdgeInsets.only(right: 10),
               child: IconButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ProfileScreen()));
+                  Get.to(() => const ProfileScreen());
                 },
                 icon: const Icon(Icons.account_circle),
               ),

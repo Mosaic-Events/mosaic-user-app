@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:user_app/screens/forgot_password.dart';
 import 'package:user_app/screens/register.dart';
 import 'package:user_app/services/auth_controller.dart';
 
@@ -150,7 +151,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     loginButton,
                     const SizedBox(height: 15),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(() => const ForgotPasswordScreen());
+                      },
                       child: const Text('Forgot Password'),
                     ),
                     Row(

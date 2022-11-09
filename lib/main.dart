@@ -1,12 +1,18 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user_app/services/auth_controller.dart';
-import 'screens/home_screen.dart';
+
+import 'services/cloud_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) => Get.put(AuthController()));
+  await Firebase.initializeApp().then((value) {
+    Get.put(AuthController());
+    Get.put(CloudController());
+  });
   runApp(const MyApp());
 }
 
@@ -22,7 +28,26 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
 
       // Theme mode depends on device settings at the beginning
-      home: HomeScreen(),
+      home: const SplashScreen(),
+    );
+  }
+}
+
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    Timer(const Duration(seconds: 50), () {});
+    return Scaffold(
+      body: Center(
+        child: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage("assets/defaults/logo.png"),
+          )),
+        ),
+      ),
     );
   }
 }

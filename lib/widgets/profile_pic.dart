@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:user_app/services/auth_controller.dart';
 
@@ -12,7 +13,7 @@ class ProfilePic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final usersCollection = AuthController.instance.usersCollection;
-    final userId = AuthController.instance.userId;
+    final userId = FirebaseAuth.instance.currentUser!.uid;
     return StreamBuilder(
       stream: usersCollection.doc(userId).snapshots(),
       builder:

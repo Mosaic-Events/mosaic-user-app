@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user_app/screens/vendor_services_screen.dart';
 import 'package:user_app/utils/appbar.dart';
 import 'package:user_app/utils/profile_menu.dart';
-import 'package:user_app/utils/view_text_field.dart';
 
 import '../utils/bottom_appbar.dart';
 

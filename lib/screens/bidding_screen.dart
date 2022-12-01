@@ -4,23 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user_app/models/business_model.dart';
 import 'package:user_app/models/user_model.dart';
-import 'package:user_app/screens/booking_detail_screen.dart';
+import 'package:user_app/screens/bidding_detail.dart';
 import 'package:user_app/utils/appbar.dart';
 
 import '../utils/bottom_appbar.dart';
 
-class MyBookingScreen extends StatelessWidget {
-  const MyBookingScreen({super.key});
+class MyBiddingScreen extends StatelessWidget {
+  const MyBiddingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!.uid;
     return Scaffold(
-      appBar: MyAppBar(title: 'My Bookings'),
+      appBar: MyAppBar(title: 'My Biddings'),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection('booking_details')
-            .where('bookedBy.uid', isEqualTo: user)
+            .collection('bidding_details')
+            .where('bidBy.uid', isEqualTo: user)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
@@ -30,21 +30,21 @@ class MyBookingScreen extends StatelessWidget {
               return ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final bookingId = snapshot.data!.docs[index]['id'];
-                  final bookedBy = snapshot.data!.docs[index]['bookedBy'];
-                  final bookedService =
-                      snapshot.data!.docs[index]['bookedService'];
-                  final UserModel user = UserModel.fromMap(bookedBy);
+                  final biddingId = snapshot.data!.docs[index]['id'];
+                  final bidBy = snapshot.data!.docs[index]['bidBy'];
+                  final biddingService =
+                      snapshot.data!.docs[index]['biddingService'];
+                  final UserModel user = UserModel.fromMap(bidBy);
                   final BusinessModel service =
-                      BusinessModel.fromMap(bookedService);
+                      BusinessModel.fromMap(biddingService);
 
                   return InkWell(
                     child: ListTile(
                       title: Text('${service.businessName}'),
-                      subtitle: Text(bookingId + " | " + user.fullname),
+                      subtitle: Text(biddingId + " | " + user.fullname),
                     ),
                     onTap: () =>
-                        Get.to(() => BookingDetail(bookingId: bookingId)),
+                        Get.to(() => BiddingDetail(biddingId: biddingId)),
                   );
                 },
               );

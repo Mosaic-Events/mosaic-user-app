@@ -1,11 +1,12 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:user_app/form/booking_form.dart';
 import 'package:user_app/models/user_model.dart';
+import 'package:user_app/services/cloud_controller.dart';
+import 'package:user_app/utils/bottom_appbar.dart';
 
 import '../utils/appbar.dart';
 import '../widgets/my_loading_widget.dart';
@@ -29,6 +30,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
     return Scaffold(
       appBar: MyAppBar(
         title: 'Service Detail Screen',
@@ -99,7 +101,10 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
                         onPressed: () async {
                           final bid = await openDialog();
                           if (bid != null) {
-                            log(bid);
+                            CloudController.instance.postBiding(
+                                serviceId: widget.serviceId,
+                                uid: uid,
+                                bid: bid);
                           }
                         },
                       ),
@@ -140,6 +145,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
           },
         ),
       ),
+      bottomNavigationBar: const MyBottomAppBar(),
     );
   }
 

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:user_app/screens/bidding_screen.dart';
 import 'package:user_app/screens/my_account_screen.dart';
 import 'package:user_app/screens/my_booking.dart';
 import 'package:user_app/services/auth_controller.dart';
@@ -40,6 +41,14 @@ class ProfileScreen extends StatelessWidget {
               trailing: Icons.arrow_forward,
               press: () {
                 Get.to(() => MyBookingScreen());
+              },
+            ),
+            ProfileMenu(
+              leading: Icons.book_outlined,
+              title: "My Biddings",
+              trailing: Icons.arrow_forward,
+              press: () {
+                Get.to(() => MyBiddingScreen());
               },
             ),
             ProfileMenu(

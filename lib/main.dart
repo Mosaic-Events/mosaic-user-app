@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:user_app/services/auth_controller.dart';
 
@@ -9,6 +10,8 @@ import 'services/cloud_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey =
+      'pk_test_51M9yITDgo9R9xZCUBSB9gYXvbp3JbgNG0XbfnImFdRxZIFwkNwVWgBpcIJkOcIf1PHc3DsS4FQKlzuQjBaElWp6a00hjB1aYHj';
   await Firebase.initializeApp().then((value) {
     Get.put(AuthController());
     Get.put(CloudController());

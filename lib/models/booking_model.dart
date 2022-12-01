@@ -8,23 +8,28 @@ class BookedServiceModel {
   String? id;
   String? bookingStatus;
   BusinessModel? bookedService;
-  List<DateTime>? bookedDates;
+  List<String>? bookedDates;
   UserModel? bookedBy;
+  int? amount;
+
   BookedServiceModel({
     this.id,
     this.bookingStatus,
     this.bookedService,
     this.bookedDates,
     this.bookedBy,
+    this.amount,
   });
+
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
       'bookingStatus': bookingStatus,
       'bookedService': bookedService?.toMap(),
-      'bookedDates': bookedDates?.map((x) => x.millisecondsSinceEpoch).toList(),
+      'bookedDates': bookedDates,
       'bookedBy': bookedBy?.toMap(),
+      'amount': amount,
     };
   }
 
@@ -33,8 +38,9 @@ class BookedServiceModel {
       id: map['id'] != null ? map['id'] as String : null,
       bookingStatus: map['bookingStatus'] != null ? map['bookingStatus'] as String : null,
       bookedService: map['bookedService'] != null ? BusinessModel.fromMap(map['bookedService'] as Map<String,dynamic>) : null,
-      bookedDates: map['bookedDates'] != null ? List<DateTime>.from((map['bookedDates'] as List<int>).map<DateTime?>((x) => DateTime.fromMillisecondsSinceEpoch(x),),) : null,
+      bookedDates: map['bookedDates'] != null ? List<String>.from((map['bookedDates'] as List<String>)) : null,
       bookedBy: map['bookedBy'] != null ? UserModel.fromMap(map['bookedBy'] as Map<String,dynamic>) : null,
+      amount: map['amount'] != null ? map['amount'] as int : null,
     );
   }
 

@@ -1,7 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:user_app/utils/appbar.dart';
@@ -17,11 +15,11 @@ class VendorServiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     businessStream() {
-      var stream;
+      Stream<QuerySnapshot<Map<String, dynamic>>> stream;
       if (category != null) {
         stream = FirebaseFirestore.instance
             .collection('businesses')
-            .where('businessCategory', isEqualTo: category)
+            .where('category', isEqualTo: category)
             .snapshots();
       } else {
         stream =
@@ -42,18 +40,16 @@ class VendorServiceScreen extends StatelessWidget {
               return ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (BuildContext context, index) {
-                  final businessName =
-                      snapshot.data!.docs[index]['businessName'];
-                  final businessId = snapshot.data!.docs[index]['businessId'];
+                  final name = snapshot.data!.docs[index]['name'];
+                  final id = snapshot.data!.docs[index]['id'];
                   final owner = snapshot.data!.docs[index]['owner'];
                   var user = UserModel.fromMap(owner);
-                  final initialPrice =
-                      snapshot.data!.docs[index]['initialPrice'];
+                  final price = snapshot.data!.docs[index]['price'];
                   final imageUrl = snapshot.data!.docs[index]['images'];
                   return MyCard(
-                    id: businessId,
-                    title: businessName,
-                    price: initialPrice,
+                    id: id,
+                    title: name,
+                    price: price,
                     description: user.fullname!,
                     imageUrl: imageUrl,
                     onPress: () {},

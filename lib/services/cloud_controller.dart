@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:user_app/models/business_model.dart';
 
 import '../models/booking_model.dart';
@@ -14,7 +15,9 @@ class CloudController {
 
   Future postBookingDetailsToFirestore({
     required String serviceId,
-    required List<DateTime> bookingDates,
+    required String status,
+    required String amount,
+    required List<String> bookingDates,
   }) async {
     // 1. calling our firestore
     final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -27,7 +30,9 @@ class CloudController {
         .get()
         .then((DocumentSnapshot doc) async {
       final data = doc.data() as Map<String, dynamic>;
+      log(data.toString());
       BusinessModel gettingBusinessModel = BusinessModel.fromMap(data);
+      log(gettingBusinessModel.toString());
       if (currentUser != null) {
         UserModel? user = UserModel(
           uid: currentUser.uid,
@@ -49,7 +54,8 @@ class CloudController {
         final bookingId = 'booking_${DateTime.now().millisecondsSinceEpoch}';
 
         bookedServiceModel.id = bookingId;
-        bookedServiceModel.bookingStatus = 'pending';
+        bookedServiceModel.amount = int.parse(amount);
+        bookedServiceModel.bookingStatus = status;
         bookedServiceModel.bookedService = bookedService;
         bookedServiceModel.bookedDates = bookingDates;
         bookedServiceModel.bookedBy = user;
@@ -62,7 +68,6 @@ class CloudController {
           log("Order successfully place wait for confirmation");
           Fluttertoast.showToast(
               msg: "Order successfully place wait for confirmation");
-          Get.back();
         });
       }
     });

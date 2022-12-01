@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,11 +31,14 @@ class _MyCatagoriesState extends State<MyCatagories> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
                   final categoryName = snapshot.data!.docs[index]['cateName'];
+                  log(categoryName);
                   return Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => VendorServiceScreen(category: categoryName,));
+                        Get.to(() => VendorServiceScreen(
+                              category: categoryName,
+                            ));
                       },
                       child: Container(
                         width: 75,

@@ -4,9 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:user_app/form/booking_form.dart';
 import 'package:user_app/models/user_model.dart';
-import 'package:user_app/screens/date_picker_screen.dart';
-import 'package:user_app/services/cloud_controller.dart';
 
 import '../utils/appbar.dart';
 import '../widgets/my_loading_widget.dart';
@@ -52,14 +51,17 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
             } else if (snapshot.connectionState == ConnectionState.done) {
               Map<String, dynamic> data =
                   snapshot.data!.data() as Map<String, dynamic>;
+              final name = data['name'];
               final owner = data['owner'];
               final images = data['images'];
+              final capacity = data['capacity'];
+              final price = data['price'];
               final UserModel user = UserModel.fromMap(owner);
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    data['businessName'],
+                    name,
                     style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -72,21 +74,24 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
                     ),
                     textAlign: TextAlign.justify,
                   ),
+                  Text(
+                    "Capacity: $capacity",
+                    style: const TextStyle(
+                      fontSize: 15,
+                    ),
+                    textAlign: TextAlign.justify,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
                         child: const Text('Book Now'),
                         onPressed: () {
-                          Get.to(() => const DatePicker())!.then((result) {
-                            if (result != null) {
-                              log('result: $result');
-                              CloudController.instance
-                                  .postBookingDetailsToFirestore(
-                                      serviceId: widget.serviceId,
-                                      bookingDates: result);
-                            }
-                          });
+                          Get.to(() => BookingForm(
+                                name: name,
+                                price: price,
+                                id: widget.serviceId,
+                              ));
                         },
                       ),
                       ElevatedButton(

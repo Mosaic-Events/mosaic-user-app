@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:user_app/screens/categories.dart';
 import 'package:user_app/screens/promotion_screen.dart';
 import 'package:user_app/screens/vendor_services_screen.dart';
 
@@ -31,9 +32,7 @@ class HomeScreen extends StatelessWidget {
               // Top row
               MyHeading(
                 title: "Promotions",
-                onPress: () {
-                  Get.to(() => const PromotionScreen());
-                },
+                onPress: () => Get.to(() => const PromotionScreen()),
               ),
 
               // Top Banner
@@ -50,7 +49,11 @@ class HomeScreen extends StatelessWidget {
               ),
 
               // Categories Heading
-              const MyHeading(title: "Categories"),
+              MyHeading(
+                title: "Categories",
+                onPress: () =>
+                  Get.to(() => const Categories()),
+              ),
 
               // Catagories
               const MyCatagories(),

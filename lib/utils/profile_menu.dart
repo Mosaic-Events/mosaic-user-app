@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class ProfileMenu extends StatelessWidget {
   const ProfileMenu({
     Key? key,
-    required this.leading,
+    this.leading,
     required this.title,
     this.trailing,
     this.press,
   }) : super(key: key);
 
-  final IconData leading;
+  final IconData? leading;
   final String title;
   final IconData? trailing;
   final VoidCallback? press;
@@ -28,7 +28,7 @@ class ProfileMenu extends StatelessWidget {
         onPressed: press,
         child: Row(
           children: [
-            Icon(leading),
+            if (leading != null) Icon(leading),
             const SizedBox(width: 20),
             Expanded(child: Text(title)),
             Icon(trailing),

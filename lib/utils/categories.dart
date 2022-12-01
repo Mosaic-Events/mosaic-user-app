@@ -31,7 +31,6 @@ class _MyCatagoriesState extends State<MyCatagories> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
                   final categoryName = snapshot.data!.docs[index]['cateName'];
-                  log(categoryName);
                   return Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: InkWell(

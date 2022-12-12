@@ -6,7 +6,6 @@ import 'package:user_app/screens/promotion_screen.dart';
 import 'package:user_app/widgets/show_dailog_box.dart';
 
 import '../screens/profile_screen.dart';
-import '../theme/theme.dart';
 
 class MyBottomAppBar extends StatefulWidget {
   const MyBottomAppBar({Key? key}) : super(key: key);
@@ -44,7 +43,7 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
         milliseconds: 800,
       ),
       child: BottomAppBar(
-        color: colorPrimary,
+        color: Theme.of(context).bottomAppBarTheme.color,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../services/auth_controller.dart';
+import '../utils/appbar.dart';
 import '../utils/view_text_field.dart';
 import '../widgets/profile_pic.dart';
 
@@ -14,10 +15,8 @@ class MyAccountScreen extends StatelessWidget {
     String password = "123456"; // FIXME:
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("My Account"),
-        centerTitle: true,
-        elevation: 0,
+      appBar: MyAppBar(
+        title: "My Account",
       ),
       body: RefreshIndicator(
         onRefresh: () async {
@@ -51,6 +50,7 @@ class MyAccountScreen extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 2.5),
                   child: ElevatedButton(
+                    style: Theme.of(context).elevatedButtonTheme.style,
                     onPressed: () {
                       if (user!.emailVerified == false) {
                         AuthController.instance.sendEmailVerifyLink();

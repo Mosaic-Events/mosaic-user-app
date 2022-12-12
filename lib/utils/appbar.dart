@@ -16,14 +16,15 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text('$title'),
       centerTitle: true,
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       elevation: 0,
       actions: [
         IconButton(
             icon: const Icon(Icons.brightness_4),
             onPressed: () {
               Get.isDarkMode
-                  ? Get.changeTheme(lightTheme)
-                  : Get.changeTheme(darkTheme);
+                  ? Get.changeTheme(MyThemeData.lightTheme)
+                  : Get.changeTheme(MyThemeData.darkTheme);
             })
       ],
     );

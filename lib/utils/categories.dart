@@ -40,11 +40,8 @@ class _MyCatagoriesState extends State<MyCatagories> {
                       child: Container(
                         width: 75,
                         decoration: BoxDecoration(
-                          color: colorPrimary,
-                          border: Border.all(
-                            color: colorPrimary,
-                          ),
-                          borderRadius: BorderRadius.circular(12),
+                          color: MyThemeData.colorPrimary,
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: Center(
                           child: Column(
@@ -57,7 +54,10 @@ class _MyCatagoriesState extends State<MyCatagories> {
                               Text(
                                 categoryName,
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.w500, fontSize: 12),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
                               ),
                             ],
                           ),

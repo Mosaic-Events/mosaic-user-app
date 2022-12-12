@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:user_app/services/auth_controller.dart';
+import 'package:user_app/theme/theme.dart';
 
 import '../utils/upload_image.dart';
 
@@ -54,7 +55,10 @@ class ProfilePic extends StatelessWidget {
                       onPressed: () {
                         UploadImage.uploadProfileImage();
                       },
-                      child: Icon(Icons.camera_alt),
+                      child: Icon(
+                        Icons.camera_alt,
+                        color: MyThemeData.iconColor,
+                      ),
                     ),
                   ),
                 )

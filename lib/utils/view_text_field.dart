@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:user_app/theme/theme.dart';
 
 class ViewTextField extends StatelessWidget {
   final IconData leading;
@@ -19,12 +20,25 @@ class ViewTextField extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 8.0),
-              child: Icon(leading),
+              child: Icon(
+                leading,
+                color: MyThemeData.iconColor,
+              ),
             ),
             const SizedBox(width: 20),
-            Expanded(child: Text(title)),
+            Expanded(
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: MyThemeData.textColor,
+                ),
+              ),
+            ),
             IconButton(
-              icon: const Icon(Icons.edit),
+              icon: Icon(
+                Icons.edit,
+                color: MyThemeData.iconColor,
+              ),
               onPressed: () {},
             ),
           ],

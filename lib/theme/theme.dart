@@ -1,59 +1,54 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 
-const colorPrimary = Colors.deepOrangeAccent;
-const colorAccent = Colors.orange;
-const creamColor = Color(0xfff5f5f5);
-const darkbluishColor = Color(0xff403b58);
+class MyThemeData {
+  static MaterialAccentColor colorPrimary = Colors.deepPurpleAccent;
+  static MaterialAccentColor buttonColor = Colors.deepPurpleAccent;
+  static Color iconColor = Colors.black;
+  static Color textColor = Colors.black;
 
-ThemeData lightTheme = ThemeData(
-  brightness: Brightness.light,
-  primaryColor: colorPrimary,
-  floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: colorAccent,
-  ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
+  static ThemeData lightTheme = ThemeData(
+    brightness: Brightness.light,
+
+    // Elevated Button design
+    elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-              EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0)),
-          shape: MaterialStateProperty.all<OutlinedBorder>(
-              RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0))),
-          backgroundColor: MaterialStateProperty.all<Color>(colorAccent))),
-  inputDecorationTheme: InputDecorationTheme(
-    border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20.0), borderSide: BorderSide.none),
-    filled: true,
-    fillColor: Colors.grey.withOpacity(0.1),
-  ),
-  appBarTheme: AppBarTheme(
-    backgroundColor: colorPrimary,
-  ),
-);
-
-ThemeData darkTheme = ThemeData(
-  brightness: Brightness.dark,
-  switchTheme: SwitchThemeData(
-    trackColor: MaterialStateProperty.all<Color>(Colors.grey),
-    thumbColor: MaterialStateProperty.all<Color>(Colors.white),
-  ),
-  inputDecorationTheme: InputDecorationTheme(
-    border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20.0), borderSide: BorderSide.none),
-    filled: true,
-    fillColor: Colors.grey.withOpacity(0.1),
-  ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ButtonStyle(
-      // padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-      //     EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0)),
-      // shape: MaterialStateProperty.all<OutlinedBorder>(
-      //     RoundedRectangleBorder(
-      //         borderRadius: BorderRadius.circular(20.0))),
-      backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-      overlayColor: MaterialStateProperty.all<Color>(Colors.black26),
+        shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        )),
+        backgroundColor: MaterialStateProperty.all<Color>(buttonColor),
+      ),
     ),
-  ),
-);
+
+    // Input Fields Design e.g TextField
+    inputDecorationTheme: InputDecorationTheme(
+      contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: BorderSide(
+            color: colorPrimary,
+          )),
+      filled: true,
+      fillColor: Colors.grey.withOpacity(0.1),
+    ),
+
+    // AppBar Design
+    appBarTheme: AppBarTheme(
+      backgroundColor: colorPrimary,
+    ),
+
+    // BottomAppBAr Design
+    bottomAppBarTheme: BottomAppBarTheme(color: colorPrimary),
+  );
+
+  static ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        )),
+        backgroundColor: MaterialStateProperty.all<Color>(buttonColor),
+      ),
+    ),
+  );
+}

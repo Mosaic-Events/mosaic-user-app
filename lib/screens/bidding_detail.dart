@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 
 import 'package:user_app/utils/appbar.dart';
 import 'package:user_app/utils/bottom_appbar.dart';
-import 'package:user_app/widgets/elevated_button.dart';
 
 import '../widgets/my_loading_widget.dart';
 

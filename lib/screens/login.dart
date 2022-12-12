@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:user_app/screens/forgot_password.dart';
 import 'package:user_app/screens/register.dart';
 import 'package:user_app/services/auth_controller.dart';
+import 'package:user_app/theme/theme.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -39,11 +40,10 @@ class _LoginScreenState extends State<LoginScreen> {
         emailController.text = value!;
       },
       textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        prefixIcon: const Icon(Icons.mail),
-        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+      decoration: const InputDecoration(
+        prefixIcon: Icon(Icons.mail),
         hintText: "Email Address",
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        //   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );
 
@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     // login button
     final loginButton = Material(
-      color: Colors.blue,
+      color: MyThemeData.buttonColor,
       borderRadius: BorderRadius.circular(10),
       child: MaterialButton(
         onPressed: () {
@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     // google signin button
     final googleSigninButton = Material(
-      color: Colors.blue,
+      color: MyThemeData.buttonColor,
       borderRadius: BorderRadius.circular(10),
       child: MaterialButton(
         onPressed: () {},
@@ -154,7 +154,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         Get.to(() => const ForgotPasswordScreen());
                       },
-                      child: const Text('Forgot Password'),
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(color: MyThemeData.colorPrimary),
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -164,10 +167,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           onTap: () {
                             Get.to(() => const SignUpScreen());
                           },
-                          child: const Text(
-                            "SignUp",
+                          child: Text(
+                            'SignUp',
                             style: TextStyle(
-                                color: Colors.blue,
+                                color: MyThemeData.colorPrimary,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold),
                           ),

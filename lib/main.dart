@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:user_app/services/auth_controller.dart';
+import 'package:user_app/theme/theme.dart';
 
 import 'services/cloud_controller.dart';
 
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-      darkTheme: ThemeData.dark(),
+      theme: MyThemeData.lightTheme,
+      darkTheme: MyThemeData.darkTheme,
       themeMode: ThemeMode.system,
 
       // Theme mode depends on device settings at the beginning

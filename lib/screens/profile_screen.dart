@@ -53,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             ProfileMenu(
               leading: Icons.settings_rounded,
-              title: "Setting",
+              title: "Settings",
               trailing: Icons.arrow_forward,
               press: () {
                 // Navigator.push(context,

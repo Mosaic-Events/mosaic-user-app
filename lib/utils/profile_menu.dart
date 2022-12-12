@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:user_app/theme/theme.dart';
 
 class ProfileMenu extends StatelessWidget {
   const ProfileMenu({
@@ -28,10 +29,23 @@ class ProfileMenu extends StatelessWidget {
         onPressed: press,
         child: Row(
           children: [
-            if (leading != null) Icon(leading),
+            if (leading != null)
+              Icon(
+                leading,
+                color: MyThemeData.iconColor,
+              ),
             const SizedBox(width: 20),
-            Expanded(child: Text(title)),
-            Icon(trailing),
+            Expanded(
+                child: Text(
+              title,
+              style: TextStyle(
+                color: MyThemeData.textColor,
+              ),
+            )),
+            Icon(
+              trailing,
+              color: MyThemeData.iconColor,
+            ),
           ],
         ),
       ),

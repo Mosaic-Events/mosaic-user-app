@@ -4,23 +4,26 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:user_app/services/cloud_controller.dart';
 import 'package:user_app/utils/appbar.dart';
 import 'package:user_app/widgets/elevated_button.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_stripe/flutter_stripe.dart';
 
+import '../utils/bottom_appbar.dart';
+
 class CheckoutScreen extends StatefulWidget {
   final String name;
   final String amount;
   final String capacity;
-  final String date;
+  // final String date;
   final String serviceId;
 
   const CheckoutScreen({
     super.key,
     required this.name,
-    required this.date,
+    // required this.date,
     required this.amount,
     required this.capacity,
     required this.serviceId,
@@ -37,9 +40,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      dates.add(widget.date);
-    });
+    dynamic data = Get.arguments;
+    dates.add(data[0]);
     return Scaffold(
       appBar: MyAppBar(title: "Checkout Screen"),
       body: Padding(
@@ -80,7 +82,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                     ),
                     Text(
-                      dates.toString(),
+                      data[0].toString(),
                       style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.normal,
@@ -146,6 +148,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
               ),
       ),
+      bottomNavigationBar: const MyBottomAppBar(),
     );
   }
 
@@ -175,7 +178,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         log('payment intent${paymentIntentData!['client_secret']}');
         log('payment intent${paymentIntentData!['amount']}');
         log('payment intent$paymentIntentData');
-       
+
         paymentIntentData = null;
         CloudController.instance.postBookingDetailsToFirestore(
             serviceId: widget.serviceId,

@@ -53,11 +53,11 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
             } else if (snapshot.connectionState == ConnectionState.done) {
               Map<String, dynamic> data =
                   snapshot.data!.data() as Map<String, dynamic>;
-              final name = data['name'];
+              final name = data['businessName'];
               final owner = data['owner'];
               final images = data['images'];
               final capacity = data['capacity'];
-              final price = data['price'];
+              final price = data['initialPrice'];
               final UserModel user = UserModel.fromMap(owner);
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

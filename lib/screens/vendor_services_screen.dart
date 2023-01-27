@@ -19,7 +19,7 @@ class VendorServiceScreen extends StatelessWidget {
       if (category != null) {
         stream = FirebaseFirestore.instance
             .collection('businesses')
-            .where('category', isEqualTo: category)
+            .where('businessCategory', isEqualTo: category)
             .snapshots();
       } else {
         stream =
@@ -40,11 +40,11 @@ class VendorServiceScreen extends StatelessWidget {
               return ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (BuildContext context, index) {
-                  final name = snapshot.data!.docs[index]['name'];
-                  final id = snapshot.data!.docs[index]['id'];
+                  final name = snapshot.data!.docs[index]['businessName'];
+                  final id = snapshot.data!.docs[index]['businessId'];
                   final owner = snapshot.data!.docs[index]['owner'];
                   var user = UserModel.fromMap(owner);
-                  final price = snapshot.data!.docs[index]['price'];
+                  final price = snapshot.data!.docs[index]['initialPrice'];
                   final imageUrl = snapshot.data!.docs[index]['images'];
                   return MyCard(
                     id: id,

@@ -11,6 +11,8 @@ class BusinessModel {
   List<String>? images;
   DateTime? joiningDate;
   UserModel? owner;
+  String? capacity;
+  
   BusinessModel({
     this.owner,
     this.businessId,
@@ -19,6 +21,7 @@ class BusinessModel {
     this.businessCategory,
     this.joiningDate,
     this.images,
+    this.capacity
   });
   // location
 
@@ -31,6 +34,7 @@ class BusinessModel {
       'images': images,
       'joiningDate': joiningDate?.millisecondsSinceEpoch,
       'owner': owner?.toMap(),
+      'capacity': capacity,
     };
   }
 
@@ -43,6 +47,7 @@ class BusinessModel {
       images: map['images'] != null ? List<String>.from(map['images']) : null,
       joiningDate: map['joiningDate'] != null ? DateTime.fromMillisecondsSinceEpoch(map['joiningDate'] as int) : null,
       owner: map['owner'] != null ? UserModel.fromMap(map['owner'] as Map<String,dynamic>) : null,
+      capacity: map['capacity'] != null ? map['capacity'] as String : null,
     );
   }
 

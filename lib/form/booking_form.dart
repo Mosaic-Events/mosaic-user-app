@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:user_app/utils/appbar.dart';
+import 'package:user_app/utils/bottom_appbar.dart';
 import 'package:user_app/widgets/elevated_button.dart';
 
 import '../screens/checkout.dart';
@@ -15,8 +16,12 @@ class BookingForm extends StatefulWidget {
   final name;
   final price;
   final id;
-  const BookingForm(
-      {super.key, required this.name, required this.price, required this.id});
+  const BookingForm({
+    super.key,
+    required this.name,
+    required this.price,
+    required this.id,
+  });
 
   @override
   State<BookingForm> createState() => _BookingFormState();
@@ -29,13 +34,14 @@ class _BookingFormState extends State<BookingForm> {
 
   @override
   void initState() {
-    dateController.text = ""; //set the initial value of text field
+    // dateController.text = ""; //set the initial value of text field
     super.initState();
   }
 
   // @override
   @override
   Widget build(BuildContext context) {
+    String formattedDate;
     return Scaffold(
       appBar: MyAppBar(title: "Booking Detail"),
       body: Padding(
@@ -95,13 +101,11 @@ class _BookingFormState extends State<BookingForm> {
                       lastDate: DateTime(2101));
 
                   if (pickedDate != null) {
-                    String formattedDate = DateFormat('yyyy-MM-dd').format(
+                    formattedDate = DateFormat('yyyy-MM-dd').format(
                         pickedDate); // format date in required form here we use yyyy-MM-dd
                     log(formattedDate); //formatted date output using intl package =>  2022-07-04
-
                     setState(() {
-                      dateController.text =
-                          formattedDate; //set foratted date to TextField value.
+                      dateController.text = formattedDate;
                     });
                   } else {
                     log("Date is not selected");
@@ -114,13 +118,15 @@ class _BookingFormState extends State<BookingForm> {
                   if (formKey.currentState!.validate()) {
                     var amount = int.parse(widget.price) *
                         int.parse(capacityController.text);
-                    Get.to(() => CheckoutScreen(
-                          name: widget.name,
-                          amount: amount.toString(),
-                          date: dateController.text,
-                          capacity: capacityController.text,
-                          serviceId: widget.id,
-                        ));
+                    Get.to(
+                      () => CheckoutScreen(
+                        name: widget.name,
+                        amount: amount.toString(),
+                        capacity: capacityController.text,
+                        serviceId: widget.id,
+                      ),
+                      arguments: [dateController.text],
+                    );
                     dateController.clear();
                     capacityController.clear();
                   }
@@ -130,6 +136,7 @@ class _BookingFormState extends State<BookingForm> {
           ),
         ),
       ),
+      bottomNavigationBar: const MyBottomAppBar(),
     );
   }
 }

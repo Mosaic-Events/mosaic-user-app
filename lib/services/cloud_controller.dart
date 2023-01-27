@@ -42,6 +42,7 @@ class CloudController {
         bookedService.businessId = gettingBusinessModel.businessId;
         bookedService.businessName = gettingBusinessModel.businessName;
         bookedService.initialPrice = gettingBusinessModel.initialPrice;
+        bookedService.capacity = gettingBusinessModel.capacity;
         bookedService.businessCategory = gettingBusinessModel.businessCategory;
         bookedService.joiningDate = gettingBusinessModel.joiningDate;
         bookedService.images = gettingBusinessModel.images;
@@ -58,6 +59,8 @@ class CloudController {
         bookedServiceModel.bookedService = bookedService;
         bookedServiceModel.bookedDates = bookingDates;
         bookedServiceModel.bookedBy = user;
+
+        log(bookedServiceModel.toString());
         // 5. sending values to DB
         await firebaseFirestore
             .collection("booking_details")

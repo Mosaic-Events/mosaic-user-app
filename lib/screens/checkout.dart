@@ -16,7 +16,7 @@ import '../utils/bottom_appbar.dart';
 class CheckoutScreen extends StatefulWidget {
   final String name;
   final String amount;
-  final String capacity;
+  // final String capacity;
   // final String date;
   final String serviceId;
 
@@ -25,7 +25,7 @@ class CheckoutScreen extends StatefulWidget {
     required this.name,
     // required this.date,
     required this.amount,
-    required this.capacity,
+    // required this.capacity,
     required this.serviceId,
   });
 
@@ -113,7 +113,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(widget.name),
-                        Text(widget.capacity),
+                        Text(data[1]+" x "+data[2]),
                         Text(widget.amount.toString()),
                       ],
                     ),

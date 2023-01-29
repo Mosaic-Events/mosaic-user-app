@@ -6,7 +6,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:user_app/models/business_model.dart';
 
-import '../models/banquet_model.dart';
 import '../models/bidding_model.dart';
 import '../models/booking_model.dart';
 import '../models/user_model.dart';
@@ -92,7 +91,7 @@ class CloudController {
         .get()
         .then((DocumentSnapshot doc) async {
       final data = doc.data() as Map<String, dynamic>;
-      BanquetModel gettingBanquetModel = BanquetModel.fromMap(data);
+      BusinessModel gettingBusinessModel = BusinessModel.fromMap(data);
       if (currentUser != null) {
         UserModel? user = UserModel(
           uid: currentUser.uid,
@@ -100,15 +99,15 @@ class CloudController {
           email: currentUser.email,
         );
 
-        log(gettingBanquetModel.name!);
+        log(gettingBusinessModel.businessName!);
         BusinessModel? biddedService = BusinessModel();
-        biddedService.businessId = gettingBanquetModel.id;
-        biddedService.businessName = gettingBanquetModel.name;
-        biddedService.initialPrice = gettingBanquetModel.price;
-        biddedService.businessCategory = gettingBanquetModel.category;
-        biddedService.joiningDate = gettingBanquetModel.registrationDate;
-        biddedService.images = gettingBanquetModel.images;
-        biddedService.owner = gettingBanquetModel.owner;
+        biddedService.businessId = gettingBusinessModel.businessId;
+        biddedService.businessName = gettingBusinessModel.businessName;
+        biddedService.initialPrice = gettingBusinessModel.initialPrice;
+        biddedService.businessCategory = gettingBusinessModel.businessCategory;
+        biddedService.joiningDate = gettingBusinessModel.joiningDate;
+        biddedService.images = gettingBusinessModel.images;
+        biddedService.owner = gettingBusinessModel.owner;
 
         // 3. calling our model
         BiddingModel biddingModel = BiddingModel();

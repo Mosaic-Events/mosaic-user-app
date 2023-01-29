@@ -67,6 +67,7 @@ class _BookingFormState extends State<BookingForm> {
                   return null;
                 },
                 onSaved: (value) {
+                  // log(value!);
                   capacityController.text = value!;
                 },
                 textInputAction: TextInputAction.next,
@@ -122,11 +123,11 @@ class _BookingFormState extends State<BookingForm> {
                       () => CheckoutScreen(
                         name: widget.name,
                         amount: amount.toString(),
-                        capacity: capacityController.text,
                         serviceId: widget.id,
                       ),
-                      arguments: [dateController.text],
+                      arguments: [dateController.text, capacityController.text, widget.price],
                     );
+                    log(capacityController.text.toString());
                     dateController.clear();
                     capacityController.clear();
                   }

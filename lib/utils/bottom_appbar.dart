@@ -3,7 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:user_app/screens/home_screen.dart';
 import 'package:user_app/screens/promotion_screen.dart';
-import 'package:user_app/widgets/show_dailog_box.dart';
 
 import '../screens/bidding_screen.dart';
 import '../screens/profile_screen.dart';

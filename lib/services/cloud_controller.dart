@@ -17,6 +17,7 @@ class CloudController {
     required String serviceId,
     required String status,
     required String amount,
+    required String people,
     required List<String> bookingDates,
   }) async {
     // 1. calling our firestore
@@ -54,6 +55,7 @@ class CloudController {
 
         bookedServiceModel.id = bookingId;
         bookedServiceModel.amount = int.parse(amount);
+        bookedServiceModel.people = int.parse(people);
         bookedServiceModel.bookingStatus = status;
         bookedServiceModel.bookedService = bookedService;
         bookedServiceModel.bookedDates = bookingDates;

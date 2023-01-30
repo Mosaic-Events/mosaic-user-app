@@ -65,12 +65,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Text(
-                      '1600 Amphitheatre Pkwy, Mountain View, CA 94043, United States',
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
                     const Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                       child: Text(
@@ -113,7 +107,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(widget.name),
-                        Text(data[1]+" x "+data[2]),
+                        Text(data[1] +
+                            " x " +
+                            data[2]), // data[1]->people ,data[2]->price
                         Text(widget.amount.toString()),
                       ],
                     ),
@@ -180,11 +176,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         log('payment intent$paymentIntentData');
 
         paymentIntentData = null;
+        dynamic data = Get.arguments;
         CloudController.instance.postBookingDetailsToFirestore(
-            serviceId: widget.serviceId,
-            status: 'Paid',
-            amount: widget.amount,
-            bookingDates: dates);
+          serviceId: widget.serviceId,
+          status: 'Paid',
+          amount: widget.amount,
+          people: data[1],
+          bookingDates: dates,
+        );
         setState(() {
           isPaymentDone = true;
         });

@@ -5,6 +5,7 @@ import 'package:user_app/screens/home_screen.dart';
 import 'package:user_app/screens/promotion_screen.dart';
 import 'package:user_app/widgets/show_dailog_box.dart';
 
+import '../screens/bidding_screen.dart';
 import '../screens/profile_screen.dart';
 
 class MyBottomAppBar extends StatefulWidget {
@@ -57,10 +58,6 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
               ),
             ),
             IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.chat),
-            ),
-            IconButton(
               onPressed: () {
                 Get.to(() => const PromotionScreen());
               },
@@ -69,7 +66,7 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
             IconButton(
               tooltip: "Notification",
               onPressed: () {
-                Get.to(() => const ShowForm());
+                Get.to(() => const MyBiddingScreen());
               },
               icon: const Icon(Icons.notifications_active),
             ),

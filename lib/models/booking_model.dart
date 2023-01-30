@@ -11,6 +11,7 @@ class BookedServiceModel {
   List<String>? bookedDates;
   UserModel? bookedBy;
   int? amount;
+  int? people;
 
   BookedServiceModel({
     this.id,
@@ -19,6 +20,7 @@ class BookedServiceModel {
     this.bookedDates,
     this.bookedBy,
     this.amount,
+    this.people,
   });
 
 
@@ -30,6 +32,7 @@ class BookedServiceModel {
       'bookedDates': bookedDates,
       'bookedBy': bookedBy?.toMap(),
       'amount': amount,
+      'people': people,
     };
   }
 
@@ -41,6 +44,7 @@ class BookedServiceModel {
       bookedDates: map['bookedDates'] != null ? List<String>.from((map['bookedDates'] as List<String>)) : null,
       bookedBy: map['bookedBy'] != null ? UserModel.fromMap(map['bookedBy'] as Map<String,dynamic>) : null,
       amount: map['amount'] != null ? map['amount'] as int : null,
+      people: map['people'] != null ? map['people'] as int : null,
     );
   }
 

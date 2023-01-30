@@ -77,6 +77,13 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
                     textAlign: TextAlign.justify,
                   ),
                   Text(
+                    "Price: $price",
+                    style: const TextStyle(
+                      fontSize: 15,
+                    ),
+                    textAlign: TextAlign.justify,
+                  ),
+                  Text(
                     "Capacity: $capacity",
                     style: const TextStyle(
                       fontSize: 15,

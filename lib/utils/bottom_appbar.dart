@@ -58,6 +58,7 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
               ),
             ),
             IconButton(
+              tooltip: 'Discounts',
               onPressed: () {
                 Get.to(() => const PromotionScreen());
               },

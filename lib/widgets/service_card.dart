@@ -68,7 +68,7 @@ class _MyCardState extends State<MyCard> {
                   Padding(
                     padding: const EdgeInsets.only(right: 16.0),
                     child: Text(
-                      widget.description,
+                      widget.description.substring(0, 150),
                       style: const TextStyle(),
                       textScaleFactor: 0.9,
                     ),

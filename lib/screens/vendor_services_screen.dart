@@ -6,7 +6,7 @@ import 'package:user_app/utils/appbar.dart';
 import 'package:user_app/utils/bottom_appbar.dart';
 
 import '../models/user_model.dart';
-import '../widgets/my_card.dart';
+import '../widgets/service_card.dart';
 
 class VendorServiceScreen extends StatelessWidget {
   String? category;
@@ -45,12 +45,13 @@ class VendorServiceScreen extends StatelessWidget {
                   final owner = snapshot.data!.docs[index]['owner'];
                   var user = UserModel.fromMap(owner);
                   final price = snapshot.data!.docs[index]['initialPrice'];
+                  final description = snapshot.data!.docs[index]['description'];
                   final imageUrl = snapshot.data!.docs[index]['images'];
                   return MyCard(
                     id: id,
                     title: name,
                     price: price,
-                    description: user.fullname!,
+                    description: description,
                     imageUrl: imageUrl,
                     onPress: () {},
                   );

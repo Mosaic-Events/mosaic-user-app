@@ -34,13 +34,6 @@ class ViewTextField extends StatelessWidget {
                 ),
               ),
             ),
-            IconButton(
-              icon: Icon(
-                Icons.edit,
-                color: MyThemeData.iconColor,
-              ),
-              onPressed: () {},
-            ),
           ],
         ),
       ),
